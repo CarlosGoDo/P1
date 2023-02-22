@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Client {
 
     public static final String INIT_ERROR = "Client should be initialized with -h <host> -p <port>";
+    public GameClient game = null;
 
     public static void main(String[] args) {
 
@@ -33,7 +34,7 @@ public class Client {
             socket = new Socket(host, port);
             System.out.println("Client connected to server");
         } catch (IllegalArgumentException e) {
-           throw new IllegalArgumentException("Proxy has invalid type or null:\n"+e.getMessage());
+            throw new IllegalArgumentException("Proxy has invalid type or null:\n"+e.getMessage());
         } catch (SecurityException e) {
             throw new SecurityException("Connection to the proxy denied for security reasons:\n"+e.getMessage());
         } catch (UnknownHostException e) {
@@ -54,6 +55,7 @@ public class Client {
         TO DO
         Create a new GameClient class and call the game execution.
          */
+        GameClient game = new GameClient(host, port, socket);
 
         try {
             DataOutputStream data_stream = new DataOutputStream(socket.getOutputStream());
